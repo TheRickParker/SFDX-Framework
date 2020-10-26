@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TriggerStage__c</fullName>
+    <defaultValue>&quot;Before&quot;</defaultValue>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Whether the SObject&apos;s data change should be reacted to Before or After the data change is applied.</inlineHelpText>
+    <label>Trigger Stage</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Before</fullName>
+                <default>true</default>
+                <label>Before</label>
+            </value>
+            <value>
+                <fullName>After</fullName>
+                <default>false</default>
+                <label>After</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

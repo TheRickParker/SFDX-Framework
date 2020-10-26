@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DebugLogDisabled__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Disables DEBUG level logging</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Disables DEBUG level logging</inlineHelpText>
+    <label>Debug Log Disabled</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

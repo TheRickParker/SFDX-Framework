@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TriggerChange__c</fullName>
+    <defaultValue>&quot;Update&quot;</defaultValue>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>What data change caused the Trigger to fire?</inlineHelpText>
+    <label>Trigger Change</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Insert</fullName>
+                <default>true</default>
+                <label>Insert</label>
+            </value>
+            <value>
+                <fullName>Update</fullName>
+                <default>false</default>
+                <label>Update</label>
+            </value>
+            <value>
+                <fullName>Delete</fullName>
+                <default>false</default>
+                <label>Delete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DisableTriggers__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>CHECKING THIS BOX DISABLES ALL TRIGGER PROCESSING</description>
+    <externalId>false</externalId>
+    <inlineHelpText>CHECKING THIS BOX DISABLES ALL TRIGGER PROCESSING</inlineHelpText>
+    <label>Disable Triggers</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

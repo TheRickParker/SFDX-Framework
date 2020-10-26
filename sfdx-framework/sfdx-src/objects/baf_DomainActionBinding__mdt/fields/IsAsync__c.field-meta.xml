@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsAsync__c</fullName>
+    <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>If True and the Trigger Stage is After, then the Domain Action will be executed as a Future.</inlineHelpText>
+    <label>Is Asynchronous</label>
+    <type>Checkbox</type>
+</CustomField>
