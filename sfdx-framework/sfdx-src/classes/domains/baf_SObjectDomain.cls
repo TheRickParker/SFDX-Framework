@@ -23,32 +23,31 @@ public with sharing class baf_SObjectDomain implements baf_iSObjectDomain {
      * Then executes them in sequence, passing in the Trigger's state & data
      */
     public void ExecuteTriggerActions() {
-        try {
-            if (TriggersDisabled()) { return; }
-            List<baf_DomainActionBinding__mdt> bindings = baf.App.DomainActionBindings().GetForTrigger(
-                request.targetSObject.getDescribe().getName(), request.action, request.process
-            );
-            for (baf_DomainActionBinding__mdt binding : bindings) {
-                String actionName = binding.DomainAction__c;
-                if (String.isBlank(actionName)) { continue; }
-                Type actionType = Type.forName(actionName);
-                if (actionType instanceOf baf_iDomainAction) {
-                    if (request.isAfter && binding.IsAsync__c == true) {
-                        String serialRequest = JSON.serialize(request);
-                        ExecuteActionAsync(actionName, serialRequest);
-                    } else {
-                        baf_iDomainAction dynamicAction = (baf_iDomainAction) actionType.newInstance();
-                        baf_ServiceResponse response = dynamicAction.Execute(
-                            new baf_ServiceRequest(actionName, request.process + ' ' + request.action)
-                                .WithParam(baf_TriggerRequest.SVC_REQUEST_KEY, request));
-                        if (response.Status == baf_RequestStatus.ERROR) {
-                            baf_LogHandler.Instance.Error(response.ThrownException);
-                        }
+        if (TriggersDisabled()) { return; }
+        List<baf_DomainActionBinding__mdt> bindings = baf.App.DomainActionBindings().GetForTrigger(
+            request.targetSObject.getDescribe().getName(), request.action, request.process
+        );
+        for (baf_DomainActionBinding__mdt binding : bindings) {
+            String actionName = binding.DomainAction__c;
+            if (String.isBlank(actionName)) { continue; }
+            if (request.isAfter && binding.IsAsync__c == true) {
+                ExecuteActionAsync(actionName, request.forAsync());
+            } else {
+                baf.Logger.Debug('[][] Domain Action Executing :: ' + actionName);
+                try {
+                    Type actionType = Type.forName(actionName);
+                    baf_iDomainAction dynamicAction = (baf_iDomainAction) actionType.newInstance();
+                    baf_ServiceResponse response = dynamicAction.Execute(
+                        new baf_ServiceRequest(actionName, request.process + ' ' + request.action)
+                            .WithParam(baf_TriggerRequest.SVC_REQUEST_KEY, request));
+                    if (response.Status == baf_RequestStatus.ERROR) {
+                        baf.Logger.Error(response.ThrownException);
                     }
+                } catch(Exception ex) {
+                    baf_LogHandler.Instance.Error(ex);
+                    continue;
                 }
             }
-        } catch(Exception ex) {
-            baf_LogHandler.Instance.Error(ex);
         }
     }
 
@@ -57,6 +56,9 @@ public with sharing class baf_SObjectDomain implements baf_iSObjectDomain {
         try {
             baf_TriggerRequest request = (baf_TriggerRequest) JSON.deserialize(serialRequest, baf_TriggerRequest.class);
             Type actionType = Type.forName(actionName);
+            
+            baf.Logger.Debug('[][] Domain Action Executing Async :: ' + actionName);
+
             baf_iDomainAction dynamicAction = (baf_iDomainAction) actionType.newInstance();
             baf_ServiceResponse response = dynamicAction.Execute(
                 new baf_ServiceRequest(actionName, request.process + ' ' + request.action)

@@ -1,11 +1,24 @@
 {
-  "packageDirectories": [
-    {
-      "path": "sfdx-src",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "sfdx-src",
+            "default": true,
+            "dependencies": [
+                {
+                    "package": "baf",
+                    "versionNumber": "1.0.0.LATEST"
+                }
+            ],
+            "package": "baf-ex1",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT"
+        }
+    ],
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "49.0",
+    "packageAliases": {
+        "baf": "0Hof40000004CIFCA2",
+        "baf-ex1": "0Hof40000004CIPCA2"
     }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "49.0"
 }

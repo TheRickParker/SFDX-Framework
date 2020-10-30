@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Update Description on Account</label>
+    <protected>false</protected>
+    <values>
+        <field>DomainAction__c</field>
+        <value xsi:type="xsd:string">ex1_AccountDomainActions.UpdateDescription</value>
+    </values>
+    <values>
+        <field>IsAsync__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Sequence__c</field>
+        <value xsi:type="xsd:double">100.0</value>
+    </values>
+    <values>
+        <field>TriggerChange__c</field>
+        <value xsi:type="xsd:string">Update</value>
+    </values>
+    <values>
+        <field>TriggerStage__c</field>
+        <value xsi:type="xsd:string">Before</value>
+    </values>
+    <values>
+        <field>TriggeredSObject__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+</CustomMetadata>

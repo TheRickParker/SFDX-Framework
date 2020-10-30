@@ -9,17 +9,95 @@ public without sharing class baf_TriggerRequest {
 
     public SObjectType targetSObject { get; set; }
 
-    public Boolean isBefore { get; set; }
-    public Boolean isAfter { get; set; }
-    public Boolean isInsert { get; set; }
-    public Boolean isUpdate { get; set; }
-    public Boolean isDelete { get; set; }
+    private Boolean m_isBefore;
+    public Boolean isBefore {
+        get {
+            return Trigger.isExecuting ? Trigger.isBefore : m_isBefore;
+        }
+        set {
+            m_isBefore = value;
+        }
+    }
 
-    public List<SObject> newRecords { get; set; }
-    public List<SObject> oldRecords { get; set; }
+    private Boolean m_isAfter;
+    public Boolean isAfter { 
+        get {
+            return Trigger.isExecuting ? Trigger.isAfter : m_isAfter;
+        }
+        set {
+            m_isAfter = value;
+        }
+    }
 
-    public Map<Id, SObject> newRecordMap { get; set; }
-    public Map<Id, SObject> oldRecordMap { get; set; }
+    private Boolean m_isInsert;
+    public Boolean isInsert {
+        get {
+            return Trigger.isExecuting ? Trigger.isInsert : m_isInsert;
+        }
+        set {
+            m_isInsert = value;
+        }
+    }
+
+    private Boolean m_isUpdate;
+    public Boolean isUpdate {
+        get {
+            return Trigger.isExecuting ? Trigger.isUpdate : m_isUpdate;
+        }
+        set {
+            m_isUpdate = value;
+        }
+    }
+
+    private Boolean m_isDelete;
+    public Boolean isDelete {
+        get {
+            return Trigger.isExecuting ? Trigger.isDelete : m_isDelete;
+        }
+        set {
+            m_isDelete = value;
+        }
+    }
+
+    private List<SObject> m_newRecords;
+    public List<SObject> newRecords {
+        get {
+            return Trigger.isExecuting ? Trigger.new : m_newRecords;
+        }
+        set {
+            m_newRecords = value;
+        }
+    }
+
+    private List<SObject> m_oldRecords;
+    public List<SObject> oldRecords {
+        get {
+            return Trigger.isExecuting ? Trigger.old : m_oldRecords;
+        }
+        set {
+            m_oldRecords = value;
+        }
+    }
+
+    private Map<Id, SObject> m_newRecordMap;
+    public Map<Id, SObject> newRecordMap {
+        get {
+            return Trigger.isExecuting ? Trigger.newMap : m_newRecordMap;
+        }
+        set {
+            m_newRecordMap = value;
+        }
+    }
+
+    private Map<Id, SObject> m_oldRecordMap;
+    public Map<Id, SObject> oldRecordMap {
+        get {
+            return Trigger.isExecuting ? Trigger.isInsert ? null : Trigger.oldMap : m_oldRecordMap;
+        }
+        set {
+            m_oldRecordMap = value;
+        }
+    }
 
     public String action { get { return isBefore ? 'Before' : 'After'; } }
 
@@ -53,17 +131,6 @@ public without sharing class baf_TriggerRequest {
         isInsert = false;
         isUpdate = false;
         isDelete = false;
-        if (!Trigger.isExecuting) { return; }
-        isBefore = Trigger.isBefore;
-        isAfter = Trigger.isAfter;
-        isInsert = Trigger.isInsert;
-        isUpdate = Trigger.isUpdate;
-        isDelete = Trigger.isDelete;
-        newRecords = Trigger.new;
-        newRecordMap = Trigger.newMap;
-        if (Trigger.isInsert) { return; }
-        oldRecords = Trigger.old;
-        oldRecordMap = Trigger.oldMap;
     }
 
     public baf_TriggerRequest SetBefore(Boolean state) { isBefore = state; return this; }
@@ -81,5 +148,18 @@ public without sharing class baf_TriggerRequest {
         Object val = svc.Parameters.get(SVC_REQUEST_KEY);
         if (val instanceOf baf_TriggerRequest) { return (baf_TriggerRequest) val; }
         return null;
+    }
+
+    public String forAsync() {
+        this.isAfter = this.isAfter;
+        this.isBefore = this.isBefore;
+        this.isInsert = this.isInsert;
+        this.isUpdate = this.isUpdate;
+        this.isDelete = this.isDelete;
+        this.newRecordMap = this.newRecordMap;
+        this.newRecords = this.newRecords;
+        this.oldRecordMap = this.oldRecordMap;
+        this.oldRecords = this.oldRecords;
+        return JSON.serialize(this);
     }
 }

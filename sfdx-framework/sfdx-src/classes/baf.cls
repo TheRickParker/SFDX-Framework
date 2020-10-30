@@ -5,8 +5,8 @@
  */
 public inherited sharing virtual class baf {
     // SINGLETON HANDLING
+    public baf() {}
     private static baf m_instance;
-    private baf() {}
     public static baf App {
         get {
             if (m_instance != null) { return m_instance; }
@@ -17,7 +17,7 @@ public inherited sharing virtual class baf {
 
     // LOGGER BINDING
 
-    public baf_LogHandler Logger = baf_LogHandler.Instance;
+    public static baf_LogHandler Logger = baf_LogHandler.Instance;
 
     // UNIT OF WORK BINDING
 
@@ -44,7 +44,7 @@ public inherited sharing virtual class baf {
     // END::: SELECTOR BINDINGS
 
     private Map<Schema.SObjectType, Object> selector_mappings = new Map<Schema.SObjectType, Object>();
-    private baf_iSObjectSelector bindingFor(Schema.SObjectType sobj, Type target) {
+    public baf_iSObjectSelector bindingFor(Schema.SObjectType sobj, Type target) {
         if (target == null) {
             throw new SelectorBindingException('Binding not provided for '+sobj.getDescribe().getName());
         }

@@ -258,11 +258,11 @@ public inherited sharing class baf_QueryFactory implements baf_iQueryFactory {
         String soql = '';
         try {
             soql = GenerateSoql();
-            baf.App.Logger.Debug(LOG_PREFIX + 'Executing SOQL :: ' + soql);
+            baf.Logger.Debug(LOG_PREFIX + 'Executing SOQL :: ' + soql);
             return (List<SObject>) Database.query(soql);
         } catch (Exception ex) {
-            baf.App.Logger.Log(System.LoggingLevel.ERROR, LOG_PREFIX + 'Error Executing SOQL :: ' + soql);
-            baf.App.Logger.Error(ex);
+            baf.Logger.Log(System.LoggingLevel.ERROR, LOG_PREFIX + 'Error Executing SOQL :: ' + soql);
+            baf.Logger.Error(ex);
         }
         return new List<SObject>();
     }
