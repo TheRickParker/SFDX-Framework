@@ -19,6 +19,7 @@
     "sourceApiVersion": "49.0",
     "packageAliases": {
         "baf": "0Hof40000004CIFCA2",
-        "baf-ex1": "0Hof40000004CIPCA2"
+        "baf-ex1": "0Hof40000004CIPCA2",
+        "baf-ex1@1.0.0-1-master": "04tf4000004F1S0AAK"
     }
 }

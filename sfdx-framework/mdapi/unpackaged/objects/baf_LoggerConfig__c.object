@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Determines how logging will behave.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>BufferLogs__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Enables log buffering, to dump logs only when CommitLogs() is called</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enables log buffering, to dump logs only when CommitLogs() is called</inlineHelpText>
+        <label>Buffer Logs</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DebugLogDisabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Disables DEBUG level logging</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Disables DEBUG level logging</inlineHelpText>
+        <label>Debug Log Disabled</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>FineLoggingDisabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Disables FINE level logging</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Disables FINE level logging</inlineHelpText>
+        <label>Fine Logging Disabled</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>InfoLoggingDisabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Disables INFO level logging</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Disables INFO level logging</inlineHelpText>
+        <label>Info Logging Disabled</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>BAF Logger Config</label>
+    <visibility>Public</visibility>
+</CustomObject>

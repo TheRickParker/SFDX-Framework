@@ -15,8 +15,7 @@ public with sharing class baf_SObjectDomain implements baf_iSObjectDomain {
     private Boolean TriggersDisabled() {
         if (disableTrigger) { return disableTrigger; }
         baf_TriggerConfig__c triggerConfig = baf_TriggerConfig__c.getInstance();
-        return ((triggerConfig != null || (triggerConfig == null && Test.isRunningTest()))
-            && triggerConfig.DisableTriggers__c == true);
+        return (triggerConfig != null && triggerConfig.DisableTriggers__c == true);
     }
 
     /**
